@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />  
+		<link rel="stylesheet" href="./assets/stylesheets/main.css">        
+		<title>Member Details</title>
+	</head>
+	
+	<body>
+        <div class='container-fluid'>
+            <div class='row'>
+                <div class='col-md-7'></div>
+                <div class='col-md-1'>
+                        <ul class='nav nav-pills pull-left'>
+                         <li><a href='/members'>Member List</a></li>
+                        </ul>    
+                </div>                
+                <div class='col-md-1'>
+                    <ul class='nav nav-pills pull-left'>
+                        <li class='active'><a href='/companies'>Company List</a></li>
+                    </ul>    
+                </div>    
+                <div class='col-md-3'></div>
+            </div>
+        </div> 
+
+		<form action="/addcompany" method="Post">		
+			<div class='container-fluid'>
+                <div class='page-header' style='text-align: center'>
+                    <div class='row'>
+                        <div class='col-md-3'></div>
+                        <div class='col-md-6'>
+                            <h1>Add Company Form</h1>
+                        </div>
+                        <div class='col-md-3'></div>
+                    </div>
+                </div>
+		    <!-- Form Fields -->
+                <%	
+                    var col1 = 'col-md-3';	//space left 
+                    var col2 = 'col-md-2';	//label 
+                    var col3 = 'col-md-4';	//input 
+                    var col4 = 'col-md-3';	//space right 
+                %>
+                <div class='row'>
+                    <div class='<%= col1 %>'></div>
+                    <div class='<%= col2 %>'>Company No </div>
+                    <div class='<%= col3 %>'><input type='text'  name='_companyNo' value='' /> </div>
+                    <div class='<%= col4 %>'></div>
+                </div>
+                <div class='row'>
+                    <div class='<%= col1 %>'></div>
+                    <div class='<%= col2 %>'>Company Description </div>
+                    <div class='<%= col3 %>'><input type='text'  name='_companyDescription' value='' /> </div>
+                    <div class='<%= col4 %>'></div>
+                </div>
+            </div>
+            <!-- End Form Fields -->
+
+            <hr>
+            <div class='container-fluid'>
+                <div class='row'>
+                    <div class='col-md-4'></div>
+                    <div class='col-md-4'>
+                        <input type="submit" style="width:100%"/>
+                    </div>
+                    <div class='col-md-4'></div>
+                </div>			
+            </div>
+
+            <% if(typeof data != 'undefined'){ %> 
+                <hr>
+                <div class='container-fluid'>
+                    <div class='col-md-3'></div>
+                    <div class='col-md-6'>
+                        <div class=jumbotron>
+                            <% if (Object.keys(data).length > 0 ){ %>
+                                <p style='text-align:center'>New Company Added<br>
+                                    No: <b><%= data._companyNo %> </b> <br>
+                                    Description: <b><%= data._companyDescription; %></b><br>
+                                </p>
+                            <% } else if (Object.keys(fail).length > 0 ){ %>
+                                <p style='text-align:center'>Error: ID already exists<br>
+                                    Company not added <br>
+                                </p>
+                            <% }else{ %>
+                                <p style='text-align:center'>Unkonwn Error<br>
+                                    Company not added <br>
+                                    Type of data: <%= typeof data %><br>
+                                    Type of fail: <%= typeof fail %><br>
+                                    data length: <%= Object.keys(data).length %><br>
+                                    fail length: <%= Object.keys(fail).length %><br>                            
+                                </p>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class='col-md-3'></div>
+                </div>
+            <% }else if(typeof fail != 'undefined'){ %>
+                <hr>
+                <div class='container-fluid'>
+                    <div class='col-md-3'></div>
+                    <div class='col-md-6'>
+                        <div class=jumbotron>
+                            
+
+                        </div>
+                    </div>
+                    <div class='col-md-3'></div>
+                </div>                
+            <% } %>
+		</form>
+		
+	</body>
+</html>

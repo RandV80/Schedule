@@ -1,0 +1,159 @@
+<?php include_once("includes/header.php"); ?>
+
+<!DOCTYPE HTML>
+
+<html>
+ <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />  
+  <link rel="stylesheet" href="./assets/stylesheets/main.css">
+  <title>Settings</title>
+ </head>
+ 
+ <body>
+
+    <form action='/settings' method='POST'>
+        <input type="hidden" name="_method" value="PUT" />
+
+        <div class='container-fluid'>
+            <div class='row'>
+            <div class='col-md-3'></div>
+            <div class='col-md-5'>
+            <ul class='nav nav-pills pull-left'>
+            <li><a href='details'>Details</a></li>
+            <li><a href='programs'>Programs</a></li>
+            <li class='active'><a href='settings'>Settings</a></li>
+            </ul>   
+            </div>
+            <div class='col-md-1'>
+            <ul class='nav nav-pills pull-left'>
+            <li><a href='/members'>Member List</a></li>
+            </ul>    
+            </div>    
+            <div class='col-md-4'></div>
+            </div>
+        </div>
+    
+    <div class='container-fluid'>
+        <div class='page-header' style='text-align: center'>
+        <div class='row'>
+        <div class='col-md-3'></div>
+        <div class='col-md-6'>
+        <h1>Settings</h1>
+        </div>
+        <div class='col-md-3'></div>
+        </div>
+        </div>
+
+        <!-- Form Fields -->
+        <%	
+            var col1 = 'col-md-3';	//space left 
+            var col2 = 'col-md-2';	//label 
+            var col3 = 'col-md-4';	//input 
+            var col4 = 'col-md-3';	//space right 
+        %>    
+        <input	type='hidden' name='_memberNo' readonly value='<%= data[0].MemberNo %>' />
+        <div class='row'>
+            <div class='<%= col1 %>'></div>
+            <div class='<%= col2 %>'>User ID</div>
+            <div class='<%= col3 %>'><input type='text' name='_userid' readonly value='<%= data[0].UserID %>' /> </div>
+            <div class='<%= col4 %>'></div>
+        </div>
+
+    <div class='row'>
+        <div class='<%= col1 %>'></div>
+        <div class='<%= col2 %>'>Member Name</div>
+        <div class='<%= col3 %>'><input	type='text' name='_memberName' readonly value='<%= data[0].MemberFirstName + ' ' + data[0].MemberLastName %>' /></div>
+        <div class='<%= col4 %>'></div>
+    </div>    
+
+        <div class='row'>
+            <div class='<%= col1 %>'></div>
+            <div class='<%= col2 %>'>Password </div>
+            <div class='<%= col3 %>'><input type='password' name='_password' value='' /> </div>
+            <div class='<%= col4 %>'></div>
+        </div>
+
+        <div class='row'>
+            <div class='<%= col1 %>'></div>
+            <div class='<%= col2 %>'>Re-enter </div>
+            <div class='<%= col3 %>'><input type='password' name='_reenter' value='' /> </div>
+            <div class='<%= col4 %>'></div>
+        </div>
+
+        <div class='row'>
+            <div class='<%= col1 %>'></div>
+            <div class='<%= col2 %>'>Scheduling Email Notification </div>
+            <div class='<%= col3 %>'><input type='radio' name='_schedulingEmailNotifaction' value='0' 
+                <% if (data[0].SchedulingEmailNotification === 0){ %><%= "checked" %> <% } %>
+                />No </div>
+            <div class='<%= col4 %>'></div>
+        </div>
+
+        <div class='row'>
+            <div class='<%= col1 %>'></div>
+            <div class='<%= col2 %>'> </div>
+            <div class='<%= col3 %>'><input type='radio' name='_schedulingEmailNotifaction' value='1' 
+                <% if (data[0].SchedulingEmailNotification === 1){ %> <%= "checked" %> <% } %>
+                />Yes </div>
+            <div class='<%= col4 %>'></div>
+        </div>
+
+        <div class='row'>
+            <div class='<%= col1 %>'></div>
+            <div class='<%= col2 %>'>Task Email Notification </div>
+            <div class='<%= col3 %>'><input type='radio' name='_taskEmailNotification' value='0' 
+                <% if(data[0].TaskManagementEmailNotification === 0){ %> <%= "checked" %> <% } %>
+                />No </div>
+            <div class='<%= col4 %>'></div>
+        </div>
+
+        <div class='row'>
+            <div class='<%= col1 %>'></div>
+            <div class='<%= col2 %>'> </div>
+            <div class='<%= col3 %>'><input type='radio' name='_taskEmailNotification' value='1' 
+                <% if(data[0].TaskManagementEmailNotification === 1){ %> <%= "checked" %> <% } %>
+                />Yes </div>
+            <div class='<%= col4 %>'></div>
+        </div>
+
+        <div class='row'>
+            <div class='<%= col1 %>'></div>
+            <div class='<%= col2 %>'>Security Level </div>
+            <div class='<%= col3 %>'><input type='radio' name='_securityLevel' value='0' 
+                <% if (data[0].SecurityLevel === 0) { %> <%= "checked" %> <% } %>
+                />Scheduling Member View </div>
+            <div class='<%= col4 %>'></div>
+        </div>
+
+        <div class='row'>
+            <div class='<%= col1 %>'></div>
+            <div class='<%= col2 %>'> </div>
+            <div class='<%= col3 %>'><input type='radio' name='_securityLevel' value='1' 
+                <% if (data[0].SecurityLevel === 1) { %> <%= "checked" %> <% } %>
+                />Scheduling Change </div>
+            <div class='<%= col4 %>'></div>
+        </div>
+
+        <div class='row'>
+            <div class='<%= col1 %>'></div>
+            <div class='<%= col2 %>'> </div>
+            <div class='<%= col3 %>'><input type='radio' name='_securityLevel' value='2' 
+                <% if (data[0].SecurityLevel === 2) { %> <%= "checked" %>  <% } %>
+                />Admin </div>
+            <div class='<%= col4 %>'></div>
+        </div>
+
+        <br>
+        <div class='row'>
+            <div class='col-md-4'></div>
+            <div class='col-md-4'> 
+                <input type="submit" value="Update" style="width:100%">
+            </div>
+            <div class='col-md-4'> </div>
+        </div>  
+
+     </div>
+    </form>    
+    
+ </body>
+</html>

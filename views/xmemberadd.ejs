@@ -1,0 +1,462 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />  
+		<link rel="stylesheet" href="./assets/stylesheets/main.css">
+		<title>Member Details</title>
+	</head>
+	
+	<body>
+        <div class='container-fluid'>
+            <div class='row'>
+				<div class='col-md-8'></div>
+				<div class='col-md-1'>
+					<ul class='nav nav-pills pull-left'>
+						<li class='active'><a href='/members'>Member List</a></li>
+					</ul>    
+				</div>    
+				<div class='col-md-3'></div>
+            </div>
+        </div> 
+
+		<form action="php/adduser.php" method="Post">		
+			<div class='container-fluid, page-header' style='text-align: center'>
+				<div class='row'>
+					<div class='col-md-3'></div>
+					<div class='col-md-6'>
+						<h1>Member Update form</h1>
+					</div>
+					<div class='col-md-3'></div>
+				</div>
+			</div>
+
+			<!-- Form Fields -->
+	<%	
+		var col1 = 'col-md-3';	//space left 
+		var col2 = 'col-md-2';	//label 
+		var col3 = 'col-md-4';	//input 
+		var col4 = 'col-md-3';	//space right 
+
+		var brk1 = 'col-md-2' //space left
+		var brk2 = 'col-md-8' //break line
+		var brk3 = 'col-md-2' //space right
+	%>
+
+		<div class='container-fluid'>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Company No</div>
+				<div class='<%= col3 %>'>
+					<select name='_companyno'>
+						<option>001</option>
+						<option selected>002</option>
+						<option>003</option>
+						<option>004</option>
+					</select>
+				</div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Member No </div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_memberno' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>User ID </div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_userid' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Password </div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_password' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Accounting System User ID </div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_accountingsystemuserid' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<!-- Break -->
+			<div class='row'>
+				<div class='<%= brk1 %>'></div>
+				<div class='<%= brk2 %>'><hr></div>
+				<div class='<%= brk3 %>'></div>
+			</div>
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>First Name </div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_memberfirstname' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Middle Name </div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_membermiddlename' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Last Name </div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_memberlastname' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Nick Name</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_membernickname' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Birthday </div>
+				<div class='<%= col3 %>'>
+					<input type='date'  name='_birthday' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Family grouping </div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_familygrouping' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<!-- Break -->
+			<div class='row'>
+				<div class='<%= brk1 %>'></div>
+				<div class='<%= brk2 %>'><hr></div>
+				<div class='<%= brk3 %>'></div>
+			</div>
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>City</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_city' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Province/State</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_provincestate' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Country</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_country' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Email 1</div>
+				<div class='<%= col3 %>'>
+					<input type='email'  name='_email1' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Email 2</div>
+				<div class='<%= col3 %>'>
+					<input type='email'  name='_email2' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Home Phone</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_homephone' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Work Phone</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_workphone' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Cell Phone</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_cellphone' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>		
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Time Zone</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_timezone' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<!-- Break -->
+			<div class='row'>
+				<div class='<%= brk1 %>'></div>
+				<div class='<%= brk2 %>'><hr></div>
+				<div class='<%= brk3 %>'></div>
+			</div>
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>First Language</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_firstlanguage' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Second Language</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_secondlanguage' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Third Language</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_thirdlanguage' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Fourth Language</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_fourthlanguage' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Program Start Date</div>
+				<div class='<%= col3 %>'>
+					<input type='date'  name='_programstartdate' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>	
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Weekly Practicum Hours</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_weeklypracticumhours' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Buddy No</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_buddyno' value='' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>eDiscount Percent</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_ediscountpercent' value='0' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Credit Hours</div>
+				<div class='<%= col3 %>'>
+					<input type='text'  name='_credithours' value='0' /> </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<!-- Break -->
+			<div class='row'>
+				<div class='<%= brk1 %>'></div>
+				<div class='<%= brk2 %>'><hr></div>
+				<div class='<%= brk3 %>'></div>
+			</div>
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Program Participant</div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_programparticipant' value='0' />No </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'></div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_programparticipant' value='1' />Participant </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'></div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_programparticipant' value='2' />Supporter </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'></div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_programparticipant' value='3' />Ambassador </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<!-- Break -->
+			<div class='row'>
+				<div class='<%= brk1 %>'></div>
+				<div class='<%= brk2 %>'><hr></div>
+				<div class='<%= brk3 %>'></div>
+			</div>
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Volunteer</div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_volunteer' value='0' />No </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'></div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_volunteer' value='1' />Yes </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<!-- Break -->
+			<div class='row'>
+				<div class='<%= brk1 %>'></div>
+				<div class='<%= brk2 %>'><hr></div>
+				<div class='<%= brk3 %>'></div>
+			</div>
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Guide</div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_guide' value='0' />No </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'></div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_guide' value='1' />Yes </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<!-- Break -->
+			<div class='row'>
+				<div class='<%= brk1 %>'></div>
+				<div class='<%= brk2 %>'><hr></div>
+				<div class='<%= brk3 %>'></div>
+			</div>
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Status</div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_status' value='0' />Active </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'></div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_status' value='1' />On Hold </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'></div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_status' value='2' />Not Active </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<!-- Break -->
+			<div class='row'>
+				<div class='<%= brk1 %>'></div>
+				<div class='<%= brk2 %>'><hr></div>
+				<div class='<%= brk3 %>'></div>
+			</div>
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Scheduling Email</div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_schedulingemailnotification' value='0' />No </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Notification</div>
+				<div class='<%= col3 %>'>
+					<input type='radio' name='_schedulingemailnotification' value='1' />Yes </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<!-- Break -->
+			<div class='row'>
+				<div class='<%= brk1 %>'></div>
+				<div class='<%= brk2 %>'><hr></div>
+				<div class='<%= brk3 %>'></div>
+			</div>
+
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Task Management Email</div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_taskmanagementemailnotification' value='0' />No </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Notification</div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_taskmanagementemailnotification' value='1' />Yes </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+			<!-- Break -->
+			<div class='row'>
+				<div class='<%= brk1 %>'></div>
+				<div class='<%= brk2 %>'><hr></div>
+				<div class='<%= brk3 %>'></div>
+			</div>
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'>Security Level</div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_securitylevel' value='0' />Scheduling Member View </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+
+			<div class='row'>
+				<div class='<%= col1 %>'></div>
+				<div class='<%= col2 %>'></div>
+				<div class='<%= col3 %>'>
+					<input type='radio'  name='_securitylevel' value='1' />Admin </div>
+				<div class='<%= col4 %>'></div>
+			</div>
+		</div>
+				<!-- End Form Fields -->
+		<hr>
+		<div class='container-fluid'>
+			<div class='row'>
+				<div class='col-md-4'></div>
+				<div class='col-md-4'>
+					<input type="submit" name="_adduser" value="Add User" style="width:100%"/>
+				</div>
+				<div class='col-md-4'></div>
+			</div>			
+		</div>				
+	</form>
+
+</body>
+</html>
