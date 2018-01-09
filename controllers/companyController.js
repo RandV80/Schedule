@@ -97,16 +97,16 @@ module.exports = function(app){
                 //CompanyNo exists, deleting
                 Companies.deleteCompany(function(err1, deleteCompanyId, newdata){
                     if(err1){
-                        res,json(err1);
+                        res.json(err1);
                     }else{
                         console.log('Deleted Company: ' + deleteCompanyId);
-                        console.log('data: ' +JSON.stringify(data));
+                        //console.log('data: ' +JSON.stringify(data));
                         //res.render('companies', {data: data});
                         Companies.getAllCompanies(function(err2, refreshdata){
                             if (err2){
                                 res.json(err2);
                             }else{
-                                res.render('companies', {data: refreshdata});
+                                res.redirect('/companies');
                             }
                         });                    
                     }
@@ -114,8 +114,8 @@ module.exports = function(app){
     
             }else{
                 //CompanyNo does not exist, return to page with message
-                var noId = {fail: 'Company No does not exists'};
-                res.render('companies', {fail:noId, data:[]});
+                //var noId = {fail: 'Company No does not exist'};
+                res.redirect('/companies');
             }
         }, deleteCompanyId);
     });

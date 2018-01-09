@@ -7,6 +7,7 @@ module.exports = function(app){
     app.get('/members', function(req, res){
         Members.getAllMembers(function(err, data){
             if(err){
+                console.log('here 2');
                 res.json(err);
             }else{
                 res.render('members', {data: data});
@@ -20,18 +21,7 @@ module.exports = function(app){
 
     app.post('/addmember', urlencodedParser, function(req, res){
         //console.log('POST: ' + JSON.stringify(req.body));
-        res.render('Posting: ' + JSON.stringify(req.body));
-    });
-
-    /*
-    app.get('/addmemberdev', function(req, res){
-        //console.log('POST: ' + JSON.stringify(req.body));
-        res.render('memberadd-dev', {});
-        //res.render('Posting: ' + JSON.stringify(req.body));
-    });    */
-
-    app.post('/addmember', urlencodedParser, function(req, res){
-        //console.log('POST: ' + JSON.stringify(req.body));
+        console.log('here 3');
         memberId = req.body._memberno;
         var data = req.body;
         console.log('Trying to add ID: ' + memberId);
@@ -50,14 +40,14 @@ module.exports = function(app){
                         res.json(err);
                     }else{
                         console.log('Added Member: ' + JSON.stringify(data));
-                        res.render('memberadded', {data: data});
+                        res.render('memberadd', {data: data});
                         //res.send('Added: ' + JSON.stringify(data))
                     }
                 }, data);
             }else{
                 console.log('id exists');
                 idExists = {fail: 'id exists'};
-                res.render('companyadd', {data: idExists});
+                res.render('memberadd', {data: idExists});
             }
         }, memberId);
        // res.send('Posting: ' + JSON.stringify(req.body));
@@ -192,16 +182,35 @@ module.exports = function(app){
     });    
     
     app.post('/deletemember', urlencodedParser, function(req, res){
-        console.log('req: ' + JSON.stringify(req.body));
+        //console.log('req: ' + JSON.stringify(req.body));
         var deleteMemberId = req.body._memberNo;
-        console.log('deleting member: ' + deleteMemberId);
-        Members.getAllMembers(function(err, data){
-            if(err){
-                res.json(err);
-            }else{
-                res.render('index', {data: data});
-            }        
-        });        
+        var checkId = [];
+        var data = req.body;
 
+        console.log('deleting member: ' + deleteMemberId);
+        
+        Members.getMemberById(function(err, checkId){
+            if(Object.keys(checkId).length !== 0){
+                //MemberNo exists, deleting
+                Members.deleteMember(function(err1, deleteMemberId, newdata){
+                    if(err1){
+                        res.json(err1);
+                    }else{
+                        console.log('Deleted Member: ' + deleteMemberId);
+                        Members.getAllMembers(function(err2, refreshdata){
+                            if(err2){
+                                res.json(err2);
+                            }else{
+                                res.redirect('/members');
+                            }        
+                        });     
+                    }
+                }, deleteMemberId, data);
+            }else{
+                //MemberNo does not exist, return to page with message
+                //var noId = {fail: 'Member No does not exist'};
+                res.redirect('/members');
+            }
+        }, deleteMemberId);
     });
 }

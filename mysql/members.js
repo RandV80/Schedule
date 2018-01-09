@@ -21,7 +21,7 @@ var Members = {
         "??,??,??,??,??,??,??,??,??,??,??,??,??,??,??" + 
         " from ?? WHERE ?? = ?";
         var inserts = [
-            //DB fields
+            //DB SELECT fields
             'CompanyNo',
             'MemberNo',
             'MemberFirstName',
@@ -60,9 +60,10 @@ var Members = {
             'SchedulingEmailNotification',
             'TaskManagementEmailNotification',
             'SecurityLevel',            
+            //DB Table
             'member_information',
-            'MemberNo',
-            id
+            //DB WHERE clause
+            'MemberNo',     id
         ];    
         sql = mysql.format(sql, inserts); 
         return db.query(sql, callback);
@@ -262,29 +263,19 @@ var Members = {
 
         console.log('SQL: ' + sql);
         return db.query(sql, callback, data);
-    }    
+    },
+    
+    deleteMember: function(callback, deleteId, data){
+        var sql = 'DELETE from ?? WHERE ?? = ?'
+        var inserts = [
+            'member_information',
+            'MemberNo',
+            deleteId
+        ];
+        sql = mysql.format(sql, inserts);
+        console.log('delete sql: ' + sql);
+        return db.query(sql, callback, data);
+    }
 };
 
 module.exports = Members;
-
-/*
-function singleMemberData(callback, activeMemberId, connection){
-    var sql ='SELECT * from ?? WHERE ?? = ?';
-    var inserts = [
-        'member_information',
-        'MemberNo',
-        activeMemberId
-    ];    
-    sql = mysql.format(sql, inserts);
-    
-    connection.query(sql, function(error, results, fields){
-        if(error) throw error;
-
-        callback(results);
-    });    
-}
-
-
-
-
-*/
