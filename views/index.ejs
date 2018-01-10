@@ -33,8 +33,15 @@
         <div class='container-fluid'>                     
             <div class='row'>
                 <div class='<%= col1 %>'></div>
-                <div class='<%= col2 %>'>Email</div>
-                <div class='<%= col3 %>'><input type='text' name='_email' value='' /></div>
+                <div class='<%= col2 %>'>User</div>
+                <div class='<%= col3 %>'><input type='text' name='_user' 
+                    <% if(typeof error != 'undefined'){ %>
+                        value='<%=error.login %>' 
+                    <% }else{ %>
+                        value=''
+                    <% } %>
+                    />
+                </div>
                 <div class='<%= col4 %>'></div>
             </div>
             <div class='row'>
@@ -52,6 +59,24 @@
                 <input type="submit" value="Login" style="width:100%">
             </div>
             <div class='col-md-4'> </div>
-        </div>          
+        </div>
+        
+        <% if(typeof error != 'undefined'){ %>
+            <hr>
+            <div class='container-fluid'>
+                <div class='col-md-3'></div>
+                <div class='col-md-6'>
+                    <div class=jumbotron>
+                        <% if (error.source === 'user'){ %>
+                            <p>Invalid User Name</p>
+                        <% } %>
+                        <% if (error.source === 'password'){ %>
+                            <p>Invalid Password</p>
+                        <% } %>
+                    </div>
+                </div>
+
+            </div>
+        <% } %>
     </form>
 </body>

@@ -39,6 +39,9 @@ var options = {
 var sessionStore = new MySQLStore(options);
 
 app.use(session({
+    genid: function(req){
+        return genuuid();
+    },
     key: 'session_cookie_name',
     secret: 'session_cookie_secret',
     store: sessionStore,
