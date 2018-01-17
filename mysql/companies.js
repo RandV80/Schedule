@@ -1,22 +1,6 @@
 var mysql = require('mysql');
 var db = require('./connection');
-/*
-function checkExistingCompanyId(callback, companyId, connection){
-    var sql = 'SELECT * FROM ?? WHERE ?? = ?';
-    var inserts = [
-        'company_table',
-        'companyNo',
-        companyId
-    ];
 
-    sql = mysql.format(sql, inserts);
-    var result = '';
-    connection.query(sql, function(error, results, fields){
-        if (error) throw error;
-        callback(results);
-    });
-}
-*/
 var Companies = {
     getAllCompanies: function(callback){
         var sql = 'SELECT * from ??';
