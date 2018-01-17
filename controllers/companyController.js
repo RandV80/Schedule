@@ -1,19 +1,41 @@
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var Companies=require('../mysql/companies');
+var permissions = require('../globals').getPermissionLevels();
+
+function checkAccess(user, required){
+    if (user >= required){
+        console.log('Access granted: ' + user + ' >= ' + required);
+        return true;
+    }else{
+        console.log ('Access denied: ' + user + ' < ' + required);
+        return false;
+    }
+}
 
 module.exports = function(app){
+    
     app.get('/companies', function(req, res){
-        Companies.getAllCompanies(function(err, data){
-            if (err){
-                res.json(err);
-            }else{
-                res.render('companies', {data: data});
-            }
-        });
+        var requiredLevel = permissions.CHANGE;
+        var userLevel = req.session.access;
+        //console.log('Permission level:' + permissionLevel);        
+        //console.log('Test Session access: ' + req.session.access)
+        if(checkAccess(userLevel, requiredLevel)){
+            Companies.getAllCompanies(function(err, data){
+                if (err){
+                    res.json(err);
+                }else{
+                    res.render('companies', {data: data});
+                }
+            });
+        }else{
+            res.render('index', {});
+        }
     });
     
     app.post('/editcompany', urlencodedParser, function(req,res){
+        var permissionLevel = permissions.CHANGE;
+        console.log('Permission level:' + permissionLevel);        
         //console.log('POST: ' + JSON.stringify(req.body));
         activeCompanyId = req.body._companyNo
 
@@ -51,11 +73,15 @@ module.exports = function(app){
     });
 
     app.get('/addcompany', function(req, res){
+        var permissionLevel = permissions.CHANGE;
+        console.log('Permission level:' + permissionLevel);        
         res.render('companyadd', {});
     });
     
     
     app.post('/addcompany', urlencodedParser, function(req,res){
+        var permissionLevel = permissions.CHANGE;
+        console.log('Permission level:' + permissionLevel);        
         companyId = req.body._companyNo;
         var data = req.body;
         console.log('Trying to add ID: ' + companyId);
@@ -87,6 +113,8 @@ module.exports = function(app){
     });
     
     app.post('/companies/delete', urlencodedParser, function(req, res){
+        var permissionLevel = permissions.ADMIN;
+        console.log('Permission level:' + permissionLevel);
         var deleteCompanyId = req.body._companyNo;
         var checkId = [];
         var data = req.body;

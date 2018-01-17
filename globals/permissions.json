@@ -1,0 +1,5 @@
+{
+    "VIEW" : 0,
+    "CHANGE": 1,
+    "ADMIN": 9
+}

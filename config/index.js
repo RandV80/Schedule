@@ -1,4 +1,5 @@
 var configValues = require('./config');
+var configSessionValues = require('./configSession');
 
 module.exports = {
     getDbConnectionString: function(){

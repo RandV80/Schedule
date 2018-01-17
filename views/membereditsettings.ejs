@@ -16,20 +16,26 @@
 
         <div class='container-fluid'>
             <div class='row'>
-            <div class='col-md-3'></div>
-            <div class='col-md-5'>
-            <ul class='nav nav-pills pull-left'>
-            <li><a href='details'>Details</a></li>
-            <li><a href='programs'>Programs</a></li>
-            <li class='active'><a href='settings'>Settings</a></li>
-            </ul>   
-            </div>
-            <div class='col-md-1'>
-            <ul class='nav nav-pills pull-left'>
-            <li><a href='/members'>Member List</a></li>
-            </ul>    
-            </div>    
-            <div class='col-md-4'></div>
+                <div class='col-md-1'></div>
+                <div class='col-md-1'>
+                    <ul class='nav nav-pills pull-left'>
+                    <li><a href='/logout'>Logout</a></li>
+                    </ul>
+                </div>		
+                <div class='col-md-2'></div>
+                <div class='col-md-5'>
+                <ul class='nav nav-pills pull-left'>
+                <li><a href='details'>Details</a></li>
+                <li><a href='programs'>Programs</a></li>
+                <li class='active'><a href='settings'>Settings</a></li>
+                </ul>   
+                </div>
+                <div class='col-md-1'>
+                <ul class='nav nav-pills pull-left'>
+                <li><a href='/members'>Member List</a></li>
+                </ul>    
+                </div>    
+                <div class='col-md-3'></div>
             </div>
         </div>
     
@@ -69,7 +75,7 @@
         <div class='row'>
             <div class='<%= col1 %>'></div>
             <div class='<%= col2 %>'>Password </div>
-            <div class='<%= col3 %>'><input type='password' name='_password' value='' /> </div>
+            <div class='<%= col3 %>'><input type='password' name='_password' value='<%= data[0].Password %>' /> </div>
             <div class='<%= col4 %>'></div>
         </div>
 
@@ -129,7 +135,7 @@
             <div class='<%= col1 %>'></div>
             <div class='<%= col2 %>'> </div>
             <div class='<%= col3 %>'><input type='radio' name='_securityLevel' value='1' 
-                <% if (data[0].SecurityLevel === 1) { %> <%= "checked" %> <% } %>
+                <% if (data[0].SecurityLevel === 0) { %> <%= "checked" %> <% } %>
                 />Scheduling Change </div>
             <div class='<%= col4 %>'></div>
         </div>
@@ -137,8 +143,8 @@
         <div class='row'>
             <div class='<%= col1 %>'></div>
             <div class='<%= col2 %>'> </div>
-            <div class='<%= col3 %>'><input type='radio' name='_securityLevel' value='2' 
-                <% if (data[0].SecurityLevel === 2) { %> <%= "checked" %>  <% } %>
+            <div class='<%= col3 %>'><input type='radio' name='_securityLevel' value='9' 
+                <% if (data[0].SecurityLevel === 9) { %> <%= "checked" %>  <% } %>
                 />Admin </div>
             <div class='<%= col4 %>'></div>
         </div>

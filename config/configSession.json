@@ -2,6 +2,6 @@
     "host": "localhost",
     "port": 3306,
     "user": "session_test",
-    "pass": "password",
-    "db": "session_test"
+    "password": "password",
+    "database": "schedule"
 }

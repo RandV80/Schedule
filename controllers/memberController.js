@@ -1,23 +1,51 @@
 var Members = require('../mysql/members');
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false});
+var permissions = require('../globals').getPermissionLevels();
 //var Members = require('./mysql/members');
+
+function checkAccess(user, required){
+    if (user >= required){
+        console.log('Access granted: ' + user + ' >= ' + required);
+        return true;
+    }else{
+        console.log ('Access denied: ' + user + ' < ' + required);
+        return false;
+    }
+}
 
 module.exports = function(app){
     app.get('/members', function(req, res){
-        Members.getAllMembers(function(err, data){
-            if(err) throw err;
-            res.render('members', {data: data});
-        });
+        var requiredLevel = permissions.CHANGE;
+        var userLevel = req.session.access;
+        //console.log('Permission level:' + permissionLevel);        
+        //console.log('Test Session access: ' + req.session.access)
+        if(checkAccess(userLevel, requiredLevel)){
+            var permissionLevel = permissions.VIEW;
+            console.log('Permission level:' + permissionLevel);
+
+            console.log('Test Session access: ' + req.session.access)
+            Members.getAllMembers(function(err, data){
+                if(err) throw err;
+                res.render('members', {data: data});
+            });
+        }else{
+            res.render('index', {});
+        }
     });
     
     app.get('/addmember', function(req, res){
+        var permissionLevel = permissions.CHANGE;
+        console.log('Permission level:' + permissionLevel);
+
         res.render('memberadd', {});
     });
 
     app.post('/addmember', urlencodedParser, function(req, res){
         //console.log('POST: ' + JSON.stringify(req.body));
-        console.log('here 3');
+        var permissionLevel = permissions.CHANGE;
+        console.log('Permission level:' + permissionLevel);
+
         memberId = req.body._memberno;
         var data = req.body;
         console.log('Trying to add ID: ' + memberId);
@@ -45,11 +73,13 @@ module.exports = function(app){
        // res.send('Posting: ' + JSON.stringify(req.body));
     });  
     
-    app.post('/memberadded', urlencodedParser, function(req, res){
-        res.render(memberadded, {});
-    });
+    //app.post('/memberadded', urlencodedParser, function(req, res){
+      //  res.render(memberadded, {});
+    //});
     
     app.post('/details', urlencodedParser, function(req,res){
+        var permissionLevel = permissions.CHANGE;
+        console.log('Permission level:' + permissionLevel);
         activeMemberId = req.body._memberNo;
 
         if(req.body._method){
@@ -74,6 +104,8 @@ module.exports = function(app){
     });
     
     app.get('/details', function(req, res){
+        var permissionLevel = permissions.CHANGE;
+        console.log('Permission level:' + permissionLevel);
         //activeMemberId = req.body._memberNo;
         console.log('Active member ID in GET details: ' + activeMemberId);
         Members.getMemberById(function(err, data){
@@ -83,6 +115,9 @@ module.exports = function(app){
     });
     
     app.get('/programs', function(req, res){
+        var permissionLevel = permissions.CHANGE;
+        console.log('Permission level:' + permissionLevel);
+
         console.log('Active member ID in GET Programs: ' + activeMemberId);
         Members.getMemberById(function(err, data){
             if(err) throw err;
@@ -91,6 +126,9 @@ module.exports = function(app){
     });
 
     app.post('/programs', urlencodedParser, function(req,res){
+        var permissionLevel = permissions.CHANGE;
+        console.log('Permission level:' + permissionLevel);
+
         activeMemberId = req.body._memberNo;
 
         if(req.body._method){
@@ -111,18 +149,22 @@ module.exports = function(app){
                 res.render('membereditprograms', {memberId: activeMemberId, data: data}); 
                 //console.log(JSON.stringify(data));           
             }, activeMemberId);
-        }    
+        }        
     });
     
     app.get('/settings', function(req, res){
+        var permissionLevel = permissions.ADMIN;
+        console.log('Permission level:' + permissionLevel);
         console.log('Active member ID in GET Settings: ' + activeMemberId);
         Members.getMemberById(function(err, data){
             if(err) throw err;
             res.render('membereditsettings', {memberId: activeMemberId, data: data});
-        }, activeMemberId);    
+        }, activeMemberId);   
     });
 
     app.post('/settings', urlencodedParser, function(req,res){
+        var permissionLevel = permissions.ADMIN;
+        console.log('Permission level:' + permissionLevel);        
         activeMemberId = req.body._memberNo;
 
         if(req.body._method){
@@ -147,6 +189,8 @@ module.exports = function(app){
     });    
     
     app.post('/deletemember', urlencodedParser, function(req, res){
+        var permissionLevel = permissions.ADMIN;
+        console.log('Permission level:' + permissionLevel);        
         //console.log('req: ' + JSON.stringify(req.body));
         var deleteMemberId = req.body._memberNo;
         var checkId = [];
