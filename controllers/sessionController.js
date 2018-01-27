@@ -1,19 +1,15 @@
 var Members = require('../mysql/members');
 var Session = require('../mysql/session');
-var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({extended: false});
 
 module.exports = function(app){
 
     app.get('/', function(req, res){
-
         res.render('index', {});
         console.log('session1:' + req.session);
     
     });
     
-    app.post('/', urlencodedParser, function(req, res){
-        //console.log('POST: ' + JSON.stringify(req.body));
+    app.post('/', function(req, res){
         console.log('session2:' + req.session);
         var user = req.body._user;
         var password = req.body._password;
@@ -22,12 +18,14 @@ module.exports = function(app){
         Session.getLogin(function(err, data){
             if (err) throw err;
             console.log('results: ' + JSON.stringify(data));
+
             if(Object.keys(data).length !== 0){
                 
                 
                 if (password === data[0].Password){
                     console.log('login successful');
                     req.session.access = data[0].SecurityLevel;
+
                     Members.getAllMembers(function(err, data){
                         if(err) throw err;
                         res.redirect('/members');
