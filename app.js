@@ -1,6 +1,10 @@
 var express = require('express');
 var path = require('path');
 
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var jsonParser = bodyParser.json();
+
 var sessionController = require('./controllers/sessionController');
 var memberController = require('./controllers/memberController');
 var companyController = require('./controllers/companyController');
@@ -18,7 +22,8 @@ app.use('/assets', express.static(__dirname + '/public'))
 
 var port = process.env.port || 3000;
 
-
+app.use(urlencodedParser);
+app.use(jsonParser);
 
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session');
@@ -54,4 +59,4 @@ sessionController(app);
 memberController(app);
 companyController(app);
 
-app.listen(port); 
+ app.listen(port); 
